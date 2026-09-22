@@ -56,7 +56,7 @@ Objetivo: Implementar a lógica de negócio, sincronização entre cache local e
 
 Objetivo: Desenvolver componentes modulares de interface do usuário, contemplando cards, busca, filtros e estados visuais.
 
-- [ ] Task 3.1: Criar componente de Card de Tarefa com alternância rápida de status (`src/components/todo-item.tsx`).
+- [x] Task 3.1: Criar componente de Card de Tarefa com alternância rápida de status (`src/components/todo-item.tsx`).
   Commit sugerido: `feat(ui): cria componente TodoItem com alternância de status`
 
 - [ ] Task 3.2: Criar componente de Busca e Seletor de Filtro de Status (`src/components/todo-filter.tsx`).
@@ -136,3 +136,6 @@ Objetivo: Realizar auditoria completa de código, verificar adesão aos princíp
 
 - [ ] Task 7.4: Auditoria das documentações do projeto.
   Commit sugerido: `docs(review): realiza auditoria das documentações do projeto e garante que estejam atualizadas e completas`
+
+- [ ] Task 7.5: Limpeza geral do código e arquivos desnecessários.
+  Commit sugerido: `refactor(review): realiza limpeza geral do código e arquivos desnecessários`
