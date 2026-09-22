@@ -62,7 +62,7 @@ Objetivo: Desenvolver componentes modulares de interface do usuário, contemplan
 - [x] Task 3.2: Criar componente de Busca e Seletor de Filtro de Status (`src/components/todo-filter.tsx`).
   Commit sugerido: `feat(ui): cria componente TodoFilter com campo de busca e seletor de status`
 
-- [ ] Task 3.3: Criar componentes para os estados de Carregamento, Erro e Lista Vazia (`src/components/ui-state/...`).
+- [x] Task 3.3: Criar componentes para os estados de Carregamento, Erro e Lista Vazia (`src/components/ui-state/...`).
   Commit sugerido: `feat(ui): implementa componentes visuais para estados de loading, erro e lista vazia`
 
 - [ ] Task 3.4: Criar Modal de Confirmação para exclusão de tarefas (`src/components/delete-confirm-modal.tsx`).
