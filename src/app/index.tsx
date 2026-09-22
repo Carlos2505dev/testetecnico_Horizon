@@ -1,98 +1,213 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+import { DeleteConfirmModal } from '../components/delete-confirm-modal';
+import { TodoFilter } from '../components/todo-filter';
+import { TodoItem } from '../components/todo-item';
+import { EmptyState, ErrorState, LoadingState } from '../components/ui-state';
+import { useTheme } from '../hooks/use-theme';
+import { useTodos } from '../hooks/use-todos';
+import { Todo } from '../types/todo';
 
 export default function HomeScreen() {
+  const theme = useTheme();
+  const router = useRouter();
+
+  const {
+    filteredTodos,
+    loading,
+    error,
+    isOfflineMode,
+    filters,
+    fetchTodos,
+    toggleTodoStatus,
+    deleteTodo,
+    setSearchQuery,
+    setStatusFilter,
+  } = useTodos();
+
+  const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
+
+  const handlePressTodo = (id: number) => {
+    router.push(`/todo/${id}` as never);
+  };
+
+  const handleCreateTodo = () => {
+    router.push('/todo/form' as never);
+  };
+
+  const handleDeleteRequest = (id: number) => {
+    const target = filteredTodos.find((t) => t.id === id);
+    if (target) {
+      setTodoToDelete(target);
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    if (todoToDelete) {
+      await deleteTodo(todoToDelete.id);
+      setTodoToDelete(null);
+    }
+  };
+
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.background }]}
+    >
+      <View style={styles.header}>
+        <View>
+          <Text style={[styles.headerTitle, { color: theme.text }]}>
+            To-Do Horizon
+          </Text>
+          <Text style={[styles.headerSubtitle, { color: theme.textSecondary }]}>
+            Gerencie suas tarefas com facilidade
+          </Text>
+        </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={handleCreateTodo}
+          activeOpacity={0.8}
+          accessibilityRole="button"
+          accessibilityLabel="Criar nova tarefa"
+        >
+          <Ionicons name="add" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+      </View>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+      {isOfflineMode && (
+        <View style={styles.offlineBanner}>
+          <Ionicons name="cloud-offline-outline" size={16} color="#F59E0B" />
+          <Text style={styles.offlineBannerText}>
+            Modo Offline: exibindo tarefas salvas no dispositivo
+          </Text>
+        </View>
+      )}
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      <TodoFilter
+        searchQuery={filters.searchQuery}
+        onSearchChange={setSearchQuery}
+        selectedStatus={filters.status}
+        onStatusChange={setStatusFilter}
+      />
+
+      {loading && filteredTodos.length === 0 ? (
+        <LoadingState message="Buscando tarefas..." />
+      ) : error && filteredTodos.length === 0 ? (
+        <ErrorState message={error} onRetry={fetchTodos} />
+      ) : (
+        <FlatList
+          data={filteredTodos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TodoItem
+              todo={item}
+              onToggleStatus={toggleTodoStatus}
+              onPress={handlePressTodo}
+              onDelete={handleDeleteRequest}
+            />
+          )}
+          contentContainerStyle={
+            filteredTodos.length === 0 ? styles.emptyListContent : styles.listContent
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={loading}
+              onRefresh={fetchTodos}
+              tintColor="#208AEF"
+              colors={['#208AEF']}
+            />
+          }
+          ListEmptyComponent={
+            <EmptyState
+              title="Nenhuma tarefa encontrada"
+              message={
+                filters.searchQuery
+                  ? `Nenhuma tarefa corresponde à busca "${filters.searchQuery}".`
+                  : 'Você ainda não possui tarefas cadastradas.'
+              }
+              actionLabel="Criar Primeira Tarefa"
+              onAction={handleCreateTodo}
+            />
+          }
+        />
+      )}
+
+      <DeleteConfirmModal
+        visible={todoToDelete !== null}
+        todoTitle={todoToDelete?.title}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setTodoToDelete(null)}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+  },
+  header: {
     flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 8,
   },
-  heroSection: {
-    alignItems: 'center',
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: '800',
+    letterSpacing: -0.5,
+  },
+  headerSubtitle: {
+    fontSize: 13,
+    marginTop: 2,
+  },
+  addButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#208AEF',
     justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#208AEF',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  offlineBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(245, 158, 11, 0.12)',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 8,
+    marginTop: 8,
+    gap: 8,
+  },
+  offlineBannerText: {
+    color: '#D97706',
+    fontSize: 12,
+    fontWeight: '600',
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
   },
-  title: {
-    textAlign: 'center',
+  listContent: {
+    paddingBottom: 24,
   },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  emptyListContent: {
+    flexGrow: 1,
   },
 });

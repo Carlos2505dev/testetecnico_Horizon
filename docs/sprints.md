@@ -74,7 +74,7 @@ Objetivo: Desenvolver componentes modulares de interface do usuário, contemplan
 
 Objetivo: Configurar as telas do aplicativo com Expo Router e realizar a integração com os hooks e componentes.
 
-- [ ] Task 4.1: Atualizar a tela principal para integrar listagem, filtros e tratamento de estados (`src/app/index.tsx`).
+- [x] Task 4.1: Atualizar a tela principal para integrar listagem, filtros e tratamento de estados (`src/app/index.tsx`).
   Commit sugerido: `feat(screens): integra listagem, filtros e estados de ui na tela principal`
 
 - [ ] Task 4.2: Criar a tela de detalhe completo da tarefa (`src/app/todo/[id].tsx`).
