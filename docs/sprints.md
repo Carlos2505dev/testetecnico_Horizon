@@ -47,7 +47,7 @@ Objetivo: Implementar a lógica de negócio, sincronização entre cache local e
 - [x] Task 2.2: Implementar fallback de dados offline e sincronização automática de alterações locais no `useTodos`.
   Commit sugerido: `feat(hooks): integra persistência local com fallback da api no hook useTodos`
 
-- [ ] Task 2.3: Criar hook auxiliar `useDebounce` para otimização do filtro de texto (`src/hooks/use-debounce.ts`).
+- [x] Task 2.3: Criar hook auxiliar `useDebounce` para otimização do filtro de texto (`src/hooks/use-debounce.ts`).
   Commit sugerido: `feat(hooks): implementa hook useDebounce para otimização da busca por texto`
 
 ---
