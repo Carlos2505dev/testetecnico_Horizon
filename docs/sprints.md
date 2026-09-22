@@ -23,7 +23,7 @@ Objetivo: Ajustar a identidade visual do app, configurar nome e ícone no Expo e
 
 Objetivo: Configurar os contratos de dados (TypeScript), cliente HTTP para a API pública JSONPlaceholder e o wrapper de armazenamento local (AsyncStorage).
 
-- [ ] Task 1.1: Criar interfaces e tipos de dados da aplicação (`src/types/todo.ts`).
+- [x] Task 1.1: Criar interfaces e tipos de dados da aplicação (`src/types/todo.ts`).
   Commit sugerido: `feat(types): adiciona modelos de dados do todo e tipos de filtros`
 
 - [ ] Task 1.2: Instalar a biblioteca de armazenamento local `@react-native-async-storage/async-storage`.
