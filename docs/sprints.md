@@ -32,7 +32,7 @@ Objetivo: Configurar os contratos de dados (TypeScript), cliente HTTP para a API
 - [x] Task 1.3: Criar cliente de API e serviço de comunicação HTTP (`src/services/api.ts` e `src/services/todo-service.ts`).
   Commit sugerido: `feat(services): implementa cliente de api jsonplaceholder e servico de tarefas`
 
-- [ ] Task 1.4: Criar módulo de persistência local para cache e operações offline (`src/storage/todo-storage.ts`).
+- [x] Task 1.4: Criar módulo de persistência local para cache e operações offline (`src/storage/todo-storage.ts`).
   Commit sugerido: `feat(storage): implementa wrapper do asyncstorage para cache local de tarefas`
 
 ---
