@@ -41,7 +41,7 @@ Objetivo: Configurar os contratos de dados (TypeScript), cliente HTTP para a API
 
 Objetivo: Implementar a lógica de negócio, sincronização entre cache local e API e otimização de busca local.
 
-- [ ] Task 2.1: Criar hook customizado `useTodos` para controle de estado das tarefas e operações CRUD (`src/hooks/use-todos.ts`).
+- [x] Task 2.1: Criar hook customizado `useTodos` para controle de estado das tarefas e operações CRUD (`src/hooks/use-todos.ts`).
   Commit sugerido: `feat(hooks): implementa hook customizado useTodos para estado e operações crud`
 
 - [ ] Task 2.2: Implementar fallback de dados offline e sincronização automática de alterações locais no `useTodos`.
