@@ -8,7 +8,7 @@ Este documento estabelece o plano sequencial de desenvolvimento em sprints do pr
 
 Objetivo: Ajustar a identidade visual do app, configurar nome e ícone no Expo e realizar a limpeza de assets e arquivos desnecessários trazidos pelo starter.
 
-- [ ] Task 0.1: Atualizar o nome da aplicação, slug e identificadores no arquivo de configuração (`app.json`).
+- [x] Task 0.1: Atualizar o nome da aplicação, slug e identificadores no arquivo de configuração (`app.json`).
   Commit sugerido: `chore(config): atualiza nome do app e identificadores no app.json`
 
 - [ ] Task 0.2: Substituir ícones, favicon e tela de splash pelos assets oficiais da aplicação na pasta `assets/`.

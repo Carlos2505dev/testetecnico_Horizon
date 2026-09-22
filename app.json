@@ -1,16 +1,18 @@
 {
   "expo": {
-    "name": "To-Do_Horizon",
-    "slug": "To-Do_Horizon",
+    "name": "To-Do Horizon",
+    "slug": "todo-horizon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "todohorizon",
+    "scheme": "todo-horizon",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.horizon.todohorizon"
     },
     "android": {
+      "package": "com.horizon.todohorizon",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
