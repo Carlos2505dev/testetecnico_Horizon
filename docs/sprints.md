@@ -59,7 +59,7 @@ Objetivo: Desenvolver componentes modulares de interface do usuário, contemplan
 - [x] Task 3.1: Criar componente de Card de Tarefa com alternância rápida de status (`src/components/todo-item.tsx`).
   Commit sugerido: `feat(ui): cria componente TodoItem com alternância de status`
 
-- [ ] Task 3.2: Criar componente de Busca e Seletor de Filtro de Status (`src/components/todo-filter.tsx`).
+- [x] Task 3.2: Criar componente de Busca e Seletor de Filtro de Status (`src/components/todo-filter.tsx`).
   Commit sugerido: `feat(ui): cria componente TodoFilter com campo de busca e seletor de status`
 
 - [ ] Task 3.3: Criar componentes para os estados de Carregamento, Erro e Lista Vazia (`src/components/ui-state/...`).
