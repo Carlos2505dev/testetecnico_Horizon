@@ -118,3 +118,21 @@ Objetivo: Adicionar cobertura de testes unitários para regras de negócio e atu
 
 - [ ] Task 6.4: Atualizar o arquivo `README.md` com instruções detalhadas de execução e decisões de arquitetura.
   Commit sugerido: `docs: atualiza readme com instruções de execução e visão geral do projeto`
+
+---
+
+## Sprint 7: Revisão de Código e Qualidade (Code Review)
+
+Objetivo: Realizar auditoria completa de código, verificar adesão aos princípios SOLID/Clean Code e validar acessibilidade e qualidade final.
+
+- [ ] Task 7.1: Auditoria de código para verificação de SOLID, Clean Code e remoção de código não utilizado.
+  Commit sugerido: `refactor(review): realiza auditoria de código e refatoração para boas práticas`
+
+- [ ] Task 7.2: Validação de acessibilidade, contraste visual e consistência nos temas claro/escuro.
+  Commit sugerido: `style(review): valida consistência visual e acessibilidade dos temas`
+
+- [ ] Task 7.3: Testes de regressão e verificação final de funcionamento da aplicação.
+  Commit sugerido: `test(qa): realiza verificação final de funcionamento e testes de regressão`
+
+- [ ] Task 7.4: Auditoria das documentações do projeto.
+  Commit sugerido: `docs(review): realiza auditoria das documentações do projeto e garante que estejam atualizadas e completas`
