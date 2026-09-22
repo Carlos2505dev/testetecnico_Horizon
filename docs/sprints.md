@@ -14,7 +14,7 @@ Objetivo: Ajustar a identidade visual do app, configurar nome e ícone no Expo e
 - [x] Task 0.2: Substituir ícones, favicon e tela de splash pelos assets oficiais da aplicação na pasta `assets/`.
   Commit sugerido: `chore(assets): atualiza ícones do aplicativo e tela de splash`
 
-- [ ] Task 0.3: Limpar assets legados, imagens não utilizadas e arquivos desnecessários trazidos pelo starter.
+- [x] Task 0.3: Limpar assets legados, imagens não utilizadas e arquivos desnecessários trazidos pelo starter.
   Commit sugerido: `chore(refactor): remove assets não utilizados e limpa estrutura inicial do projeto`
 
 ---
