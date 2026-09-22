@@ -65,7 +65,7 @@ Objetivo: Desenvolver componentes modulares de interface do usuário, contemplan
 - [x] Task 3.3: Criar componentes para os estados de Carregamento, Erro e Lista Vazia (`src/components/ui-state/...`).
   Commit sugerido: `feat(ui): implementa componentes visuais para estados de loading, erro e lista vazia`
 
-- [ ] Task 3.4: Criar Modal de Confirmação para exclusão de tarefas (`src/components/delete-confirm-modal.tsx`).
+- [x] Task 3.4: Criar Modal de Confirmação para exclusão de tarefas (`src/components/delete-confirm-modal.tsx`).
   Commit sugerido: `feat(ui): cria modal de confirmação de exclusão de tarefa`
 
 ---
