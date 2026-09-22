@@ -13,6 +13,7 @@ export function useTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isOfflineMode, setIsOfflineMode] = useState<boolean>(false);
   const [filters, setFilters] = useState<TodoFilters>({
     searchQuery: '',
     status: 'all',
@@ -21,17 +22,32 @@ export function useTodos() {
   const fetchTodos = useCallback(async () => {
     setLoading(true);
     setError(null);
+
+    const cachedData = await todoStorage.getStoredTodos();
+    if (cachedData && cachedData.length > 0) {
+      setTodos(cachedData);
+      setLoading(false);
+    }
+
     try {
       const data = await todoService.getTodos();
-      setTodos(data);
-      await todoStorage.saveStoredTodos(data);
-    } catch {
-      const cachedData = await todoStorage.getStoredTodos();
-      if (cachedData && cachedData.length > 0) {
-        setTodos(cachedData);
+      if (!cachedData || cachedData.length === 0) {
+        setTodos(data);
+        await todoStorage.saveStoredTodos(data);
       } else {
+        const mergedMap = new Map<number, Todo>();
+        data.forEach((todo) => mergedMap.set(todo.id, todo));
+        cachedData.forEach((todo) => mergedMap.set(todo.id, todo));
+        const mergedList = Array.from(mergedMap.values());
+        setTodos(mergedList);
+        await todoStorage.saveStoredTodos(mergedList);
+      }
+      setIsOfflineMode(false);
+    } catch {
+      if (!cachedData || cachedData.length === 0) {
         setError('Não foi possível carregar as tarefas. Verifique sua conexão.');
       }
+      setIsOfflineMode(true);
     } finally {
       setLoading(false);
     }
@@ -41,46 +57,32 @@ export function useTodos() {
     fetchTodos();
   }, [fetchTodos]);
 
-  const addTodo = useCallback(async (payload: CreateTodoPayload): Promise<Todo | null> => {
+  const addTodo = useCallback(async (payload: CreateTodoPayload): Promise<Todo> => {
     setError(null);
-    try {
-      const newTodoFromApi = await todoService.createTodo(payload);
-      const newTodo: Todo = {
-        id: newTodoFromApi?.id ? Number(newTodoFromApi.id) + Date.now() : Date.now(),
-        userId: 1,
-        title: payload.title.trim(),
-        completed: payload.completed ?? false,
-      };
+    const newTodo: Todo = {
+      id: Date.now(),
+      userId: 1,
+      title: payload.title.trim(),
+      completed: payload.completed ?? false,
+    };
 
-      setTodos((prev) => {
-        const updated = [newTodo, ...prev];
-        todoStorage.saveStoredTodos(updated);
-        return updated;
-      });
-      return newTodo;
+    setTodos((prev) => {
+      const updated = [newTodo, ...prev];
+      todoStorage.saveStoredTodos(updated);
+      return updated;
+    });
+
+    try {
+      await todoService.createTodo(payload);
     } catch {
-      const localNewTodo: Todo = {
-        id: Date.now(),
-        userId: 1,
-        title: payload.title.trim(),
-        completed: payload.completed ?? false,
-      };
-      setTodos((prev) => {
-        const updated = [localNewTodo, ...prev];
-        todoStorage.saveStoredTodos(updated);
-        return updated;
-      });
-      return localNewTodo;
+      setIsOfflineMode(true);
     }
+
+    return newTodo;
   }, []);
 
   const updateTodo = useCallback(async (id: number, payload: UpdateTodoPayload): Promise<boolean> => {
     setError(null);
-    try {
-      await todoService.updateTodo(id, payload);
-    } catch {
-      // Continua com atualização local se falhar na API
-    }
 
     setTodos((prev) => {
       const updated = prev.map((todo) =>
@@ -89,6 +91,12 @@ export function useTodos() {
       todoStorage.saveStoredTodos(updated);
       return updated;
     });
+
+    try {
+      await todoService.updateTodo(id, payload);
+    } catch {
+      setIsOfflineMode(true);
+    }
 
     return true;
   }, []);
@@ -101,17 +109,18 @@ export function useTodos() {
 
   const deleteTodo = useCallback(async (id: number): Promise<boolean> => {
     setError(null);
-    try {
-      await todoService.deleteTodo(id);
-    } catch {
-      // Continua com exclusão local se falhar na API
-    }
 
     setTodos((prev) => {
       const updated = prev.filter((todo) => todo.id !== id);
       todoStorage.saveStoredTodos(updated);
       return updated;
     });
+
+    try {
+      await todoService.deleteTodo(id);
+    } catch {
+      setIsOfflineMode(true);
+    }
 
     return true;
   }, []);
@@ -144,6 +153,7 @@ export function useTodos() {
     filteredTodos,
     loading,
     error,
+    isOfflineMode,
     filters,
     fetchTodos,
     addTodo,
