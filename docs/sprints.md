@@ -26,7 +26,7 @@ Objetivo: Configurar os contratos de dados (TypeScript), cliente HTTP para a API
 - [x] Task 1.1: Criar interfaces e tipos de dados da aplicação (`src/types/todo.ts`).
   Commit sugerido: `feat(types): adiciona modelos de dados do todo e tipos de filtros`
 
-- [ ] Task 1.2: Instalar a biblioteca de armazenamento local `@react-native-async-storage/async-storage`.
+- [x] Task 1.2: Instalar a biblioteca de armazenamento local `@react-native-async-storage/async-storage`.
   Commit sugerido: `chore(deps): instala o pacote async-storage para persistência local`
 
 - [ ] Task 1.3: Criar cliente de API e serviço de comunicação HTTP (`src/services/api.ts` e `src/services/todo-service.ts`).
