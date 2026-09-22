@@ -29,7 +29,7 @@ Objetivo: Configurar os contratos de dados (TypeScript), cliente HTTP para a API
 - [x] Task 1.2: Instalar a biblioteca de armazenamento local `@react-native-async-storage/async-storage`.
   Commit sugerido: `chore(deps): instala o pacote async-storage para persistência local`
 
-- [ ] Task 1.3: Criar cliente de API e serviço de comunicação HTTP (`src/services/api.ts` e `src/services/todo-service.ts`).
+- [x] Task 1.3: Criar cliente de API e serviço de comunicação HTTP (`src/services/api.ts` e `src/services/todo-service.ts`).
   Commit sugerido: `feat(services): implementa cliente de api jsonplaceholder e servico de tarefas`
 
 - [ ] Task 1.4: Criar módulo de persistência local para cache e operações offline (`src/storage/todo-storage.ts`).
