@@ -107,7 +107,7 @@ Objetivo: Aplicar as regras estritas de validação de formulário, mensagens de
 
 Objetivo: Realizar testes práticos de execução no simulador/dispositivo real, corrigindo eventuais falhas de layout, inconsistências e erros de execução.
 
-- [ ] Task 6.1: Testar e ajustar a execução no simulador (iOS / Android / Web) corrigindo eventuais falhas de rotas e exibição.
+- [x] Task 6.1: Testar e ajustar a execução no simulador (iOS / Android / Web) corrigindo eventuais falhas de rotas e exibição.
   Commit sugerido: `fix(simulator): ajusta compatibilidade de execução e corrige falhas detectadas no simulador`
 
 - [ ] Task 6.2: Ajustar responsividade, espaçamentos e comportamentos do teclado virtual nos dispositivos.
