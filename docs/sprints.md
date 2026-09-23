@@ -143,7 +143,7 @@ Objetivo: Adicionar cobertura de testes unitários para regras de negócio e atu
 
 Objetivo: Realizar auditoria completa de código, verificar adesão aos princípios SOLID/Clean Code e validar acessibilidade e qualidade final.
 
-- [ ] Task 8.1: Auditoria de código para verificação de SOLID, Clean Code e remoção de código não utilizado.
+- [x] Task 8.1: Auditoria de código para verificação de SOLID, Clean Code e remoção de código não utilizado.
   Commit sugerido: `refactor(review): realiza auditoria de código e refatoração para boas práticas`
 
 - [ ] Task 8.2: Validação de acessibilidade, contraste visual e consistência nos temas claro/escuro.
@@ -155,5 +155,5 @@ Objetivo: Realizar auditoria completa de código, verificar adesão aos princíp
 - [ ] Task 8.4: Auditoria das documentações do projeto.
   Commit sugerido: `docs(review): realiza auditoria das documentações do projeto e garante que estejam atualizadas e completas`
 
-- [ ] Task 8.5: Limpeza geral do código e arquivos desnecessários.
+- [x] Task 8.5: Limpeza geral do código e arquivos desnecessários.
   Commit sugerido: `refactor(review): realiza limpeza geral do código e arquivos desnecessários`

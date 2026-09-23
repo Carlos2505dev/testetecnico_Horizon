@@ -23,7 +23,7 @@ export default function TodoDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { showSuccess, showError, showInfo } = useToast();
 
-  const { todos, loading, toggleTodoStatus, deleteTodo } = useTodos();
+  const { todos, loading, restoreTodo, toggleTodoStatus, deleteTodo } = useTodos();
 
   const [todo, setTodo] = useState<Todo | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -112,10 +112,17 @@ export default function TodoDetailScreen() {
 
   const handleConfirmDelete = async () => {
     if (isDeleting) return;
+    const deletedItem = todo;
     setIsDeleting(true);
     try {
-      await deleteTodo(todo.id);
-      showSuccess('Tarefa excluída com sucesso!');
+      await deleteTodo(deletedItem.id);
+      showSuccess('Tarefa excluída com sucesso!', {
+        label: 'Desfazer',
+        onPress: async () => {
+          await restoreTodo(deletedItem);
+          showSuccess('Exclusão desfeita com sucesso!');
+        },
+      });
       setShowDeleteModal(false);
       router.back();
     } catch {
