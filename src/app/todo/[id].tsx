@@ -185,6 +185,34 @@ export default function TodoDetailScreen() {
               {todo.userId}
             </Text>
           </View>
+
+          <View style={styles.divider} />
+
+          <View style={styles.descriptionContainer}>
+            <View style={styles.descriptionHeaderRow}>
+              <Ionicons
+                name="document-text-outline"
+                size={18}
+                color={theme.primary}
+              />
+              <Text style={[styles.descriptionTitle, { color: theme.text }]}>
+                Observações
+              </Text>
+            </View>
+            <Text
+              style={[
+                styles.descriptionText,
+                {
+                  color: todo.description
+                    ? theme.text
+                    : theme.textSecondary,
+                  fontStyle: todo.description ? 'normal' : 'italic',
+                },
+              ]}
+            >
+              {todo.description || 'Nenhuma observação adicionada para esta tarefa.'}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.actionsSection}>
@@ -322,6 +350,23 @@ const styles = StyleSheet.create({
   infoValue: {
     fontSize: 14,
     fontWeight: '600',
+  },
+  descriptionContainer: {
+    marginTop: 2,
+  },
+  descriptionHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginBottom: 8,
+  },
+  descriptionTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  descriptionText: {
+    fontSize: 14,
+    lineHeight: 20,
   },
   actionsSection: {
     marginTop: 24,

@@ -64,6 +64,7 @@ export function useTodos() {
       userId: 1,
       title: payload.title.trim(),
       completed: payload.completed ?? false,
+      description: payload.description?.trim() || undefined,
     };
 
     setTodos((prev) => {

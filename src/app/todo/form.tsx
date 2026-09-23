@@ -28,6 +28,7 @@ export default function TodoFormScreen() {
   const { todos, addTodo, updateTodo } = useTodos();
 
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [completed, setCompleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,6 +38,7 @@ export default function TodoFormScreen() {
       const existingTodo = todos.find((t) => t.id === Number(id));
       if (existingTodo) {
         setTitle(existingTodo.title);
+        setDescription(existingTodo.description || '');
         setCompleted(existingTodo.completed);
       }
     }
@@ -60,11 +62,13 @@ export default function TodoFormScreen() {
       if (isEditing && id) {
         await updateTodo(Number(id), {
           title: title.trim(),
+          description: description.trim() || undefined,
           completed,
         });
       } else {
         await addTodo({
           title: title.trim(),
+          description: description.trim() || undefined,
           completed,
         });
       }
@@ -159,6 +163,40 @@ export default function TodoFormScreen() {
                   <Text style={[styles.errorText, { color: theme.danger }]}>{errorMessage}</Text>
                 </View>
               )}
+            </View>
+
+            <View style={styles.divider} />
+
+            <View style={styles.fieldContainer}>
+              <View style={styles.labelRow}>
+                <Text style={[styles.label, { color: theme.text }]}>
+                  Observações / Descrição
+                </Text>
+                <Text style={[styles.charCounter, { color: theme.textSecondary }]}>
+                  {description.length}/500
+                </Text>
+              </View>
+
+              <TextInput
+                style={[
+                  styles.input,
+                  styles.textArea,
+                  {
+                    color: theme.text,
+                    backgroundColor: theme.background,
+                    borderColor: 'transparent',
+                  },
+                ]}
+                placeholder="Adicione observações ou detalhes adicionais sobre a tarefa (opcional)"
+                placeholderTextColor={theme.textSecondary}
+                value={description}
+                onChangeText={setDescription}
+                maxLength={500}
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+                accessibilityLabel="Campo para observações sobre a tarefa"
+              />
             </View>
 
             <View style={styles.divider} />
@@ -281,6 +319,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     fontSize: 15,
     borderWidth: 1.5,
+  },
+  textArea: {
+    height: 100,
+    paddingTop: 12,
+    paddingBottom: 12,
   },
   errorContainer: {
     flexDirection: 'row',

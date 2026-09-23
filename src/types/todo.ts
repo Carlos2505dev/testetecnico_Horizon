@@ -3,6 +3,7 @@ export interface Todo {
   userId: number;
   title: string;
   completed: boolean;
+  description?: string;
 }
 
 export type StatusFilter = 'all' | 'pending' | 'completed';
@@ -15,11 +16,13 @@ export interface TodoFilters {
 export interface CreateTodoPayload {
   title: string;
   completed?: boolean;
+  description?: string;
 }
 
 export interface UpdateTodoPayload {
   title?: string;
   completed?: boolean;
+  description?: string;
 }
 
 export interface FormValidationError {
