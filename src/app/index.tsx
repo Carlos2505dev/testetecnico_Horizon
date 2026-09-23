@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 
 import { DeleteConfirmModal } from '../components/delete-confirm-modal';
 import { TodoFilter } from '../components/todo-filter';
@@ -40,6 +40,12 @@ export default function HomeScreen() {
 
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchTodos();
+    }, [fetchTodos])
+  );
 
   const handlePressTodo = (id: number) => {
     router.push(`/todo/${id}` as never);
