@@ -135,6 +135,16 @@ export default function HomeScreen() {
           <Text style={styles.offlineBannerText}>
             Modo Offline: exibindo tarefas salvas no dispositivo
           </Text>
+          <TouchableOpacity
+            style={styles.offlineRetryButton}
+            onPress={fetchTodos}
+            activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel="Tentar reconectar e recarregar tarefas"
+          >
+            <Ionicons name="refresh-outline" size={14} color="#D97706" />
+            <Text style={styles.offlineRetryText}>Tentar novamente</Text>
+          </TouchableOpacity>
         </View>
       )}
 
@@ -260,6 +270,20 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
     flex: 1,
+  },
+  offlineRetryButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(217, 119, 6, 0.15)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    gap: 4,
+  },
+  offlineRetryText: {
+    color: '#D97706',
+    fontSize: 11,
+    fontWeight: '700',
   },
   listContent: {
     paddingBottom: 24,
