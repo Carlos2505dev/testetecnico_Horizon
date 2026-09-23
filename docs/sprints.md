@@ -134,7 +134,7 @@ Objetivo: Adicionar cobertura de testes unitários para regras de negócio e atu
 - [x] Task 7.3: Escrever testes unitários para o hook `useTodos` e gerenciamento de storage.
   Commit sugerido: `test(hooks): adiciona testes unitários para o hook useTodos e armazenamento local`
 
-- [ ] Task 7.4: Atualizar o arquivo `README.md` com instruções detalhadas de execução e decisões de arquitetura.
+- [x] Task 7.4: Atualizar o arquivo `README.md` com instruções detalhadas de execução e decisões de arquitetura.
   Commit sugerido: `docs: atualiza readme com instruções de execução e visão geral do projeto`
 
 ---
@@ -152,7 +152,7 @@ Objetivo: Realizar auditoria completa de código, verificar adesão aos princíp
 - [x] Task 8.3: Testes de regressão e verificação final de funcionamento da aplicação.
   Commit sugerido: `test(qa): realiza verificação final de funcionamento e testes de regressão`
 
-- [ ] Task 8.4: Auditoria das documentações do projeto.
+- [x] Task 8.4: Auditoria das documentações do projeto.
   Commit sugerido: `docs(review): realiza auditoria das documentações do projeto e garante que estejam atualizadas e completas`
 
 - [x] Task 8.5: Limpeza geral do código e arquivos desnecessários.
