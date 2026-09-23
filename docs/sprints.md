@@ -128,7 +128,7 @@ Objetivo: Adicionar cobertura de testes unitários para regras de negócio e atu
 - [x] Task 7.1: Configurar ambiente de testes com Jest e React Native Testing Library.
   Commit sugerido: `test(setup): configura ambiente de testes com jest e react native testing library`
 
-- [ ] Task 7.2: Escrever testes unitários para as regras de validação de formulário e lógica de filtro.
+- [x] Task 7.2: Escrever testes unitários para as regras de validação de formulário e lógica de filtro.
   Commit sugerido: `test(validation): adiciona testes unitários para validação de formulário e filtros`
 
 - [ ] Task 7.3: Escrever testes unitários para o hook `useTodos` e gerenciamento de storage.
