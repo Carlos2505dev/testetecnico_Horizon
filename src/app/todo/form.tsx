@@ -17,12 +17,14 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 
 import { useTheme } from '../../hooks/use-theme';
 import { useTodos } from '../../hooks/use-todos';
+import { useToast } from '../../components/ui-toast';
 import { validateTodoTitle } from '../../utils/validation';
 
 export default function TodoFormScreen() {
   const theme = useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id?: string }>();
+  const { showSuccess, showError } = useToast();
 
   const isEditing = Boolean(id);
   const { todos, addTodo, updateTodo } = useTodos();
@@ -65,16 +67,20 @@ export default function TodoFormScreen() {
           description: description.trim() || undefined,
           completed,
         });
+        showSuccess('Tarefa atualizada com sucesso!');
       } else {
         await addTodo({
           title: title.trim(),
           description: description.trim() || undefined,
           completed,
         });
+        showSuccess('Tarefa criada com sucesso!');
       }
       router.back();
     } catch {
-      setErrorMessage('Não foi possível salvar a tarefa. Tente novamente.');
+      const errorMsg = 'Não foi possível salvar a tarefa. Tente novamente.';
+      setErrorMessage(errorMsg);
+      showError(errorMsg);
     } finally {
       setIsSubmitting(false);
     }

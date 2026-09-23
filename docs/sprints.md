@@ -101,6 +101,9 @@ Objetivo: Aplicar as regras estritas de validação de formulário, mensagens de
 - [x] Task 5.3: Refinar suporte a temas claro/escuro e ajustes de contraste (`src/constants/theme.ts`).
   Commit sugerido: `style(theme): ajusta suporte aos temas claro e escuro e contraste visual`
 
+- [x] Task 5.4: Criar componente toast para mensagens de sucesso, erro e informações (`src/components/ui-toast`).
+  Commit sugerido: `feat(ui): cria componente ui-toast integrado com temas claro e escuro`
+
 ---
 
 ## Sprint 6: Ajustes, Correções de Erros e Testes no Simulador

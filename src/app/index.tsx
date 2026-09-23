@@ -17,11 +17,13 @@ import { TodoItem } from '../components/todo-item';
 import { EmptyState, ErrorState, LoadingState } from '../components/ui-state';
 import { useTheme } from '../hooks/use-theme';
 import { useTodos } from '../hooks/use-todos';
+import { useToast } from '../components/ui-toast';
 import { Todo } from '../types/todo';
 
 export default function HomeScreen() {
   const theme = useTheme();
   const router = useRouter();
+  const { showSuccess, showError } = useToast();
 
   const {
     filteredTodos,
@@ -59,7 +61,10 @@ export default function HomeScreen() {
       setIsDeleting(true);
       try {
         await deleteTodo(todoToDelete.id);
+        showSuccess('Tarefa excluída com sucesso!');
         setTodoToDelete(null);
+      } catch {
+        showError('Erro ao excluir a tarefa.');
       } finally {
         setIsDeleting(false);
       }

@@ -14,12 +14,14 @@ import { DeleteConfirmModal } from '../../components/delete-confirm-modal';
 import { LoadingState } from '../../components/ui-state';
 import { useTheme } from '../../hooks/use-theme';
 import { useTodos } from '../../hooks/use-todos';
+import { useToast } from '../../components/ui-toast';
 import { Todo } from '../../types/todo';
 
 export default function TodoDetailScreen() {
   const theme = useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { showSuccess, showError, showInfo } = useToast();
 
   const { todos, loading, toggleTodoStatus, deleteTodo } = useTodos();
 
@@ -92,7 +94,16 @@ export default function TodoDetailScreen() {
   }
 
   const handleToggle = async () => {
-    await toggleTodoStatus(todo.id);
+    try {
+      await toggleTodoStatus(todo.id);
+      showInfo(
+        !todo.completed
+          ? 'Tarefa marcada como concluída!'
+          : 'Tarefa marcada como pendente!'
+      );
+    } catch {
+      showError('Não foi possível alterar o status da tarefa.');
+    }
   };
 
   const handleEdit = () => {
@@ -104,8 +115,11 @@ export default function TodoDetailScreen() {
     setIsDeleting(true);
     try {
       await deleteTodo(todo.id);
+      showSuccess('Tarefa excluída com sucesso!');
       setShowDeleteModal(false);
       router.back();
+    } catch {
+      showError('Erro ao excluir a tarefa.');
     } finally {
       setIsDeleting(false);
     }
