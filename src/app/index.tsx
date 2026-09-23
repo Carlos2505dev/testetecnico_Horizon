@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 
 import { DeleteConfirmModal } from '../components/delete-confirm-modal';
 import { TodoFilter } from '../components/todo-filter';
@@ -46,11 +46,7 @@ export default function HomeScreen() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [showClearModal, setShowClearModal] = useState(false);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchTodos();
-    }, [fetchTodos])
-  );
+
 
   const totalCount = todos.length;
   const completedCount = React.useMemo(() => {

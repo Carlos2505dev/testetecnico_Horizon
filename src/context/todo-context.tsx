@@ -50,7 +50,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     setError(null);
 
     try {
-      const data = await todoService.getTodos(40);
+      const data = await todoService.getTodos(35);
       if (!cachedData || cachedData.length === 0) {
         setTodos(data);
         await todoStorage.saveStoredTodos(data);
@@ -61,8 +61,11 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
           return editedLocal || apiItem;
         });
         const mergedList = [...localCreatedTodos, ...apiTodos];
-        setTodos(mergedList);
-        await todoStorage.saveStoredTodos(mergedList);
+        const isDifferent = JSON.stringify(mergedList) !== JSON.stringify(cachedData);
+        if (isDifferent) {
+          setTodos(mergedList);
+          await todoStorage.saveStoredTodos(mergedList);
+        }
       }
       setIsOfflineMode(false);
     } catch {
