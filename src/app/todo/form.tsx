@@ -17,6 +17,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 
 import { useTheme } from '../../hooks/use-theme';
 import { useTodos } from '../../hooks/use-todos';
+import { validateTodoTitle } from '../../utils/validation';
 
 export default function TodoFormScreen() {
   const theme = useTheme();
@@ -42,17 +43,9 @@ export default function TodoFormScreen() {
   }, [id, isEditing, todos]);
 
   const validate = (): boolean => {
-    const trimmedTitle = title.trim();
-    if (!trimmedTitle) {
-      setErrorMessage('O título da tarefa é obrigatório.');
-      return false;
-    }
-    if (trimmedTitle.length < 3) {
-      setErrorMessage('O título deve conter no mínimo 3 caracteres.');
-      return false;
-    }
-    if (trimmedTitle.length > 100) {
-      setErrorMessage('O título deve conter no máximo 100 caracteres.');
+    const error = validateTodoTitle(title);
+    if (error) {
+      setErrorMessage(error.title || 'Título inválido');
       return false;
     }
     setErrorMessage(null);

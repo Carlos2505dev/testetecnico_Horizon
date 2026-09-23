@@ -92,7 +92,7 @@ Objetivo: Configurar as telas do aplicativo com Expo Router e realizar a integra
 
 Objetivo: Aplicar as regras estritas de validação de formulário, mensagens de erro visuais e refinamento dos temas claro/escuro.
 
-- [ ] Task 5.1: Implementar validação do título (obrigatório, de 3 a 100 caracteres) com feedback visual claro.
+- [x] Task 5.1: Implementar validação do título (obrigatório, de 3 a 100 caracteres) com feedback visual claro.
   Commit sugerido: `feat(validation): implementa regras de validação do título e mensagens de erro`
 
 - [ ] Task 5.2: Garantir a confirmação prévia antes de efetivar qualquer exclusão de tarefa.
@@ -154,4 +154,3 @@ Objetivo: Realizar auditoria completa de código, verificar adesão aos princíp
 
 - [ ] Task 8.5: Limpeza geral do código e arquivos desnecessários.
   Commit sugerido: `refactor(review): realiza limpeza geral do código e arquivos desnecessários`
-
