@@ -95,7 +95,7 @@ Objetivo: Aplicar as regras estritas de validação de formulário, mensagens de
 - [x] Task 5.1: Implementar validação do título (obrigatório, de 3 a 100 caracteres) com feedback visual claro.
   Commit sugerido: `feat(validation): implementa regras de validação do título e mensagens de erro`
 
-- [ ] Task 5.2: Garantir a confirmação prévia antes de efetivar qualquer exclusão de tarefa.
+- [x] Task 5.2: Garantir a confirmação prévia antes de efetivar qualquer exclusão de tarefa.
   Commit sugerido: `feat(crud): adiciona confirmação obrigatória antes da exclusão de tarefas`
 
 - [ ] Task 5.3: Refinar suporte a temas claro/escuro e ajustes de contraste (`src/constants/theme.ts`).
