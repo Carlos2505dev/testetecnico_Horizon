@@ -149,7 +149,7 @@ Objetivo: Realizar auditoria completa de código, verificar adesão aos princíp
 - [x] Task 8.2: Validação de acessibilidade, contraste visual e consistência nos temas claro/escuro.
   Commit sugerido: `style(review): valida consistência visual e acessibilidade dos temas`
 
-- [ ] Task 8.3: Testes de regressão e verificação final de funcionamento da aplicação.
+- [x] Task 8.3: Testes de regressão e verificação final de funcionamento da aplicação.
   Commit sugerido: `test(qa): realiza verificação final de funcionamento e testes de regressão`
 
 - [ ] Task 8.4: Auditoria das documentações do projeto.
