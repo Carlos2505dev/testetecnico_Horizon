@@ -131,7 +131,7 @@ Objetivo: Adicionar cobertura de testes unitários para regras de negócio e atu
 - [x] Task 7.2: Escrever testes unitários para as regras de validação de formulário e lógica de filtro.
   Commit sugerido: `test(validation): adiciona testes unitários para validação de formulário e filtros`
 
-- [ ] Task 7.3: Escrever testes unitários para o hook `useTodos` e gerenciamento de storage.
+- [x] Task 7.3: Escrever testes unitários para o hook `useTodos` e gerenciamento de storage.
   Commit sugerido: `test(hooks): adiciona testes unitários para o hook useTodos e armazenamento local`
 
 - [ ] Task 7.4: Atualizar o arquivo `README.md` com instruções detalhadas de execução e decisões de arquitetura.
