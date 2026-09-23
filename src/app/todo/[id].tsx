@@ -25,6 +25,7 @@ export default function TodoDetailScreen() {
 
   const [todo, setTodo] = useState<Todo | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -99,9 +100,15 @@ export default function TodoDetailScreen() {
   };
 
   const handleConfirmDelete = async () => {
-    await deleteTodo(todo.id);
-    setShowDeleteModal(false);
-    router.back();
+    if (isDeleting) return;
+    setIsDeleting(true);
+    try {
+      await deleteTodo(todo.id);
+      setShowDeleteModal(false);
+      router.back();
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   return (
@@ -267,6 +274,7 @@ export default function TodoDetailScreen() {
       <DeleteConfirmModal
         visible={showDeleteModal}
         todoTitle={todo.title}
+        isDeleting={isDeleting}
         onConfirm={handleConfirmDelete}
         onCancel={() => setShowDeleteModal(false)}
       />

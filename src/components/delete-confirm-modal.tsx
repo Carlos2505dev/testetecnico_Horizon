@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   Modal,
   StyleSheet,
   Text,
@@ -13,6 +14,7 @@ import { useTheme } from '../hooks/use-theme';
 export interface DeleteConfirmModalProps {
   visible: boolean;
   todoTitle?: string;
+  isDeleting?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -20,6 +22,7 @@ export interface DeleteConfirmModalProps {
 export function DeleteConfirmModal({
   visible,
   todoTitle,
+  isDeleting = false,
   onConfirm,
   onCancel,
 }: DeleteConfirmModalProps) {
@@ -30,9 +33,9 @@ export function DeleteConfirmModal({
       visible={visible}
       transparent
       animationType="fade"
-      onRequestClose={onCancel}
+      onRequestClose={isDeleting ? undefined : onCancel}
     >
-      <TouchableWithoutFeedback onPress={onCancel}>
+      <TouchableWithoutFeedback onPress={isDeleting ? undefined : onCancel}>
         <View style={styles.overlay}>
           <TouchableWithoutFeedback>
             <View
@@ -61,8 +64,10 @@ export function DeleteConfirmModal({
                     styles.button,
                     styles.cancelButton,
                     { backgroundColor: theme.backgroundSelected },
+                    isDeleting && styles.buttonDisabled,
                   ]}
                   onPress={onCancel}
+                  disabled={isDeleting}
                   activeOpacity={0.7}
                   accessibilityRole="button"
                   accessibilityLabel="Cancelar exclusão"
@@ -73,13 +78,25 @@ export function DeleteConfirmModal({
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={[styles.button, styles.confirmButton]}
+                  style={[
+                    styles.button,
+                    styles.confirmButton,
+                    isDeleting && styles.buttonDisabled,
+                  ]}
                   onPress={onConfirm}
+                  disabled={isDeleting}
                   activeOpacity={0.8}
                   accessibilityRole="button"
                   accessibilityLabel="Confirmar exclusão de tarefa"
                 >
-                  <Text style={styles.confirmButtonText}>Excluir</Text>
+                  {isDeleting ? (
+                    <View style={styles.loadingContent}>
+                      <ActivityIndicator size="small" color="#FFFFFF" />
+                      <Text style={styles.confirmButtonText}>Excluindo...</Text>
+                    </View>
+                  ) : (
+                    <Text style={styles.confirmButtonText}>Excluir</Text>
+                  )}
                 </TouchableOpacity>
               </View>
             </View>
@@ -154,5 +171,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '600',
+  },
+  loadingContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
   },
 });

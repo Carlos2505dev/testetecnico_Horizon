@@ -37,6 +37,7 @@ export default function HomeScreen() {
   } = useTodos();
 
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handlePressTodo = (id: number) => {
     router.push(`/todo/${id}` as never);
@@ -54,9 +55,14 @@ export default function HomeScreen() {
   };
 
   const handleConfirmDelete = async () => {
-    if (todoToDelete) {
-      await deleteTodo(todoToDelete.id);
-      setTodoToDelete(null);
+    if (todoToDelete && !isDeleting) {
+      setIsDeleting(true);
+      try {
+        await deleteTodo(todoToDelete.id);
+        setTodoToDelete(null);
+      } finally {
+        setIsDeleting(false);
+      }
     }
   };
 
@@ -146,6 +152,7 @@ export default function HomeScreen() {
       <DeleteConfirmModal
         visible={todoToDelete !== null}
         todoTitle={todoToDelete?.title}
+        isDeleting={isDeleting}
         onConfirm={handleConfirmDelete}
         onCancel={() => setTodoToDelete(null)}
       />
