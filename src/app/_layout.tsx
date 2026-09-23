@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
 import { AnimatedSplashOverlay } from '../components/animated-icon';
 import { ToastProvider } from '../components/ui-toast';
+import { TodoProvider } from '../context/todo-context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,28 +16,30 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <ToastProvider>
-        <AnimatedSplashOverlay />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            animation: 'slide_from_right',
-          }}
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen
-            name="todo/[id]"
-            options={{
+        <TodoProvider>
+          <AnimatedSplashOverlay />
+          <Stack
+            screenOptions={{
+              headerShown: false,
               animation: 'slide_from_right',
             }}
-          />
-          <Stack.Screen
-            name="todo/form"
-            options={{
-              animation: 'slide_from_bottom',
-              presentation: 'modal',
-            }}
-          />
-        </Stack>
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen
+              name="todo/[id]"
+              options={{
+                animation: 'slide_from_right',
+              }}
+            />
+            <Stack.Screen
+              name="todo/form"
+              options={{
+                animation: 'slide_from_bottom',
+                presentation: 'modal',
+              }}
+            />
+          </Stack>
+        </TodoProvider>
       </ToastProvider>
     </ThemeProvider>
   );

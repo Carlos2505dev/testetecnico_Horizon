@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+import { TodoProvider } from '../src/context/todo-context';
 import { useTodos } from '../src/hooks/use-todos';
 import { todoService } from '../src/services/todo-service';
 import { todoStorage } from '../src/storage/todo-storage';
@@ -25,7 +26,7 @@ describe('Hook useTodos', () => {
   it('deve carregar tarefas do storage e da API na inicialização', async () => {
     let hook: any;
     await act(async () => {
-      hook = renderHook(() => useTodos());
+      hook = renderHook(() => useTodos(), { wrapper: TodoProvider });
     });
 
     expect(hook.result.current.todos).toEqual(initialTodos);
@@ -38,7 +39,7 @@ describe('Hook useTodos', () => {
 
     let hook: any;
     await act(async () => {
-      hook = renderHook(() => useTodos());
+      hook = renderHook(() => useTodos(), { wrapper: TodoProvider });
     });
 
     await act(async () => {
@@ -54,7 +55,7 @@ describe('Hook useTodos', () => {
 
     let hook: any;
     await act(async () => {
-      hook = renderHook(() => useTodos());
+      hook = renderHook(() => useTodos(), { wrapper: TodoProvider });
     });
 
     await act(async () => {
@@ -69,7 +70,7 @@ describe('Hook useTodos', () => {
 
     let hook: any;
     await act(async () => {
-      hook = renderHook(() => useTodos());
+      hook = renderHook(() => useTodos(), { wrapper: TodoProvider });
     });
 
     await act(async () => {
@@ -85,7 +86,7 @@ describe('Hook useTodos', () => {
 
     let hook: any;
     await act(async () => {
-      hook = renderHook(() => useTodos());
+      hook = renderHook(() => useTodos(), { wrapper: TodoProvider });
     });
 
     expect(hook.result.current.isOfflineMode).toBe(true);
