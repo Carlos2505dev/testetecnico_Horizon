@@ -146,7 +146,7 @@ Objetivo: Realizar auditoria completa de código, verificar adesão aos princíp
 - [x] Task 8.1: Auditoria de código para verificação de SOLID, Clean Code e remoção de código não utilizado.
   Commit sugerido: `refactor(review): realiza auditoria de código e refatoração para boas práticas`
 
-- [ ] Task 8.2: Validação de acessibilidade, contraste visual e consistência nos temas claro/escuro.
+- [x] Task 8.2: Validação de acessibilidade, contraste visual e consistência nos temas claro/escuro.
   Commit sugerido: `style(review): valida consistência visual e acessibilidade dos temas`
 
 - [ ] Task 8.3: Testes de regressão e verificação final de funcionamento da aplicação.
