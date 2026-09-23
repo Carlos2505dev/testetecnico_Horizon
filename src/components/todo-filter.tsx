@@ -81,7 +81,7 @@ export function TodoFilter({
                 styles.chip,
                 {
                   backgroundColor: isActive
-                    ? '#208AEF'
+                    ? theme.primary
                     : theme.backgroundElement,
                 },
               ]}
@@ -95,8 +95,8 @@ export function TodoFilter({
                 style={[
                   styles.chipText,
                   {
-                    color: isActive ? '#FFFFFF' : theme.textSecondary,
-                    fontWeight: isActive ? '600' : '400',
+                    color: isActive ? theme.secondary : theme.textSecondary,
+                    fontWeight: isActive ? '700' : '400',
                   },
                 ]}
               >

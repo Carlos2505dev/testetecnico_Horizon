@@ -98,7 +98,7 @@ Objetivo: Aplicar as regras estritas de validação de formulário, mensagens de
 - [x] Task 5.2: Garantir a confirmação prévia antes de efetivar qualquer exclusão de tarefa.
   Commit sugerido: `feat(crud): adiciona confirmação obrigatória antes da exclusão de tarefas`
 
-- [ ] Task 5.3: Refinar suporte a temas claro/escuro e ajustes de contraste (`src/constants/theme.ts`).
+- [x] Task 5.3: Refinar suporte a temas claro/escuro e ajustes de contraste (`src/constants/theme.ts`).
   Commit sugerido: `style(theme): ajusta suporte aos temas claro e escuro e contraste visual`
 
 ---

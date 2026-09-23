@@ -27,14 +27,14 @@ export function ErrorState({
       </Text>
       {onRetry && (
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button, { backgroundColor: theme.primary }]}
           onPress={onRetry}
           activeOpacity={0.8}
           accessibilityRole="button"
           accessibilityLabel="Tentar novamente"
         >
-          <Ionicons name="reload-outline" size={16} color="#FFFFFF" style={styles.buttonIcon} />
-          <Text style={styles.buttonText}>Tentar Novamente</Text>
+          <Ionicons name="reload-outline" size={16} color={theme.secondary} style={styles.buttonIcon} />
+          <Text style={[styles.buttonText, { color: theme.secondary }]}>Tentar Novamente</Text>
         </TouchableOpacity>
       )}
     </View>

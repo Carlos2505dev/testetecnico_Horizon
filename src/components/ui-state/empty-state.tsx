@@ -29,14 +29,14 @@ export function EmptyState({
       </Text>
       {onAction && actionLabel && (
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button, { backgroundColor: theme.primary }]}
           onPress={onAction}
           activeOpacity={0.8}
           accessibilityRole="button"
           accessibilityLabel={actionLabel}
         >
-          <Ionicons name="add-circle-outline" size={18} color="#FFFFFF" style={styles.buttonIcon} />
-          <Text style={styles.buttonText}>{actionLabel}</Text>
+          <Ionicons name="add-circle-outline" size={18} color={theme.secondary} style={styles.buttonIcon} />
+          <Text style={[styles.buttonText, { color: theme.secondary }]}>{actionLabel}</Text>
         </TouchableOpacity>
       )}
     </View>

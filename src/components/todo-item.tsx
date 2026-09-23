@@ -36,7 +36,7 @@ export function TodoItem({ todo, onToggleStatus, onPress, onDelete }: TodoItemPr
         <Ionicons
           name={todo.completed ? 'checkmark-circle' : 'ellipse-outline'}
           size={24}
-          color={todo.completed ? '#10B981' : theme.textSecondary}
+          color={todo.completed ? theme.success : theme.textSecondary}
         />
       </TouchableOpacity>
 
@@ -58,15 +58,15 @@ export function TodoItem({ todo, onToggleStatus, onPress, onDelete }: TodoItemPr
               styles.badge,
               {
                 backgroundColor: todo.completed
-                  ? 'rgba(16, 185, 129, 0.15)'
-                  : 'rgba(245, 158, 11, 0.15)',
+                  ? 'rgba(46, 196, 182, 0.15)'
+                  : 'rgba(245, 184, 0, 0.15)',
               },
             ]}
           >
             <Text
               style={[
                 styles.badgeText,
-                { color: todo.completed ? '#10B981' : '#F59E0B' },
+                { color: todo.completed ? theme.success : theme.warning },
               ]}
             >
               {todo.completed ? 'Concluída' : 'Pendente'}

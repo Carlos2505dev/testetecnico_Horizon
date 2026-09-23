@@ -11,7 +11,7 @@ export function LoadingState({ message = 'Carregando tarefas...' }: LoadingState
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="#208AEF" />
+      <ActivityIndicator size="large" color={theme.primary} />
       <Text style={[styles.message, { color: theme.textSecondary }]}>
         {message}
       </Text>

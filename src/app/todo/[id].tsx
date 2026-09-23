@@ -126,7 +126,7 @@ export default function TodoDetailScreen() {
           accessibilityRole="button"
           accessibilityLabel="Editar tarefa"
         >
-          <Ionicons name="create-outline" size={22} color="#208AEF" />
+          <Ionicons name="create-outline" size={22} color={theme.primary} />
         </TouchableOpacity>
       </View>
 
@@ -143,15 +143,15 @@ export default function TodoDetailScreen() {
                 styles.badge,
                 {
                   backgroundColor: todo.completed
-                    ? 'rgba(16, 185, 129, 0.15)'
-                    : 'rgba(245, 158, 11, 0.15)',
+                    ? 'rgba(46, 196, 182, 0.15)'
+                    : 'rgba(245, 184, 0, 0.15)',
                 },
               ]}
             >
               <Text
                 style={[
                   styles.badgeText,
-                  { color: todo.completed ? '#10B981' : '#F59E0B' },
+                  { color: todo.completed ? theme.success : theme.warning },
                 ]}
               >
                 {todo.completed ? 'Concluída' : 'Pendente'}
@@ -193,8 +193,8 @@ export default function TodoDetailScreen() {
               styles.toggleButton,
               {
                 backgroundColor: todo.completed
-                  ? 'rgba(245, 158, 11, 0.15)'
-                  : 'rgba(16, 185, 129, 0.15)',
+                  ? 'rgba(245, 184, 0, 0.15)'
+                  : 'rgba(46, 196, 182, 0.15)',
               },
             ]}
             onPress={handleToggle}
@@ -209,12 +209,12 @@ export default function TodoDetailScreen() {
                   : 'checkmark-circle-outline'
               }
               size={20}
-              color={todo.completed ? '#F59E0B' : '#10B981'}
+              color={todo.completed ? theme.warning : theme.success}
             />
             <Text
               style={[
                 styles.toggleButtonText,
-                { color: todo.completed ? '#F59E0B' : '#10B981' },
+                { color: todo.completed ? theme.warning : theme.success },
               ]}
             >
               {todo.completed

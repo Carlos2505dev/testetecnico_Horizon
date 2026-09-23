@@ -75,19 +75,19 @@ export default function HomeScreen() {
         </View>
 
         <TouchableOpacity
-          style={styles.addButton}
+          style={[styles.addButton, { backgroundColor: theme.primary }]}
           onPress={handleCreateTodo}
           activeOpacity={0.8}
           accessibilityRole="button"
           accessibilityLabel="Criar nova tarefa"
         >
-          <Ionicons name="add" size={24} color="#FFFFFF" />
+          <Ionicons name="add" size={24} color={theme.secondary} />
         </TouchableOpacity>
       </View>
 
       {isOfflineMode && (
         <View style={styles.offlineBanner}>
-          <Ionicons name="cloud-offline-outline" size={16} color="#F59E0B" />
+          <Ionicons name="cloud-offline-outline" size={16} color={theme.warning} />
           <Text style={styles.offlineBannerText}>
             Modo Offline: exibindo tarefas salvas no dispositivo
           </Text>
@@ -124,8 +124,8 @@ export default function HomeScreen() {
             <RefreshControl
               refreshing={loading}
               onRefresh={fetchTodos}
-              tintColor="#208AEF"
-              colors={['#208AEF']}
+              tintColor={theme.primary}
+              colors={[theme.primary]}
             />
           }
           ListEmptyComponent={

@@ -104,9 +104,9 @@ export default function TodoFormScreen() {
             accessibilityLabel="Salvar tarefa"
           >
             {isSubmitting ? (
-              <ActivityIndicator size="small" color="#208AEF" />
+              <ActivityIndicator size="small" color={theme.primary} />
             ) : (
-              <Text style={styles.saveHeaderButtonText}>Salvar</Text>
+              <Text style={[styles.saveHeaderButtonText, { color: theme.primary }]}>Salvar</Text>
             )}
           </TouchableOpacity>
         </View>
@@ -134,7 +134,7 @@ export default function TodoFormScreen() {
                   {
                     color: theme.text,
                     backgroundColor: theme.background,
-                    borderColor: errorMessage ? '#EF4444' : 'transparent',
+                    borderColor: errorMessage ? theme.danger : 'transparent',
                   },
                 ]}
                 placeholder="Ex: Finalizar documentação do projeto"
@@ -154,9 +154,9 @@ export default function TodoFormScreen() {
                   <Ionicons
                     name="alert-circle-outline"
                     size={14}
-                    color="#EF4444"
+                    color={theme.danger}
                   />
-                  <Text style={styles.errorText}>{errorMessage}</Text>
+                  <Text style={[styles.errorText, { color: theme.danger }]}>{errorMessage}</Text>
                 </View>
               )}
             </View>
@@ -183,7 +183,7 @@ export default function TodoFormScreen() {
               <Switch
                 value={completed}
                 onValueChange={setCompleted}
-                trackColor={{ false: '#767577', true: '#10B981' }}
+                trackColor={{ false: '#767577', true: theme.success }}
                 thumbColor="#FFFFFF"
                 accessibilityLabel="Alternar status inicial da tarefa"
               />
@@ -191,7 +191,7 @@ export default function TodoFormScreen() {
           </View>
 
           <TouchableOpacity
-            style={[styles.submitButton, isSubmitting && styles.submitButtonDisabled]}
+            style={[styles.submitButton, { backgroundColor: theme.primary }, isSubmitting && styles.submitButtonDisabled]}
             onPress={handleSubmit}
             disabled={isSubmitting}
             activeOpacity={0.8}
@@ -199,15 +199,15 @@ export default function TodoFormScreen() {
             accessibilityLabel={isEditing ? 'Atualizar tarefa' : 'Criar tarefa'}
           >
             {isSubmitting ? (
-              <ActivityIndicator color="#FFFFFF" size="small" />
+              <ActivityIndicator color={theme.secondary} size="small" />
             ) : (
               <>
                 <Ionicons
                   name={isEditing ? 'save-outline' : 'add-circle-outline'}
                   size={20}
-                  color="#FFFFFF"
+                  color={theme.secondary}
                 />
-                <Text style={styles.submitButtonText}>
+                <Text style={[styles.submitButtonText, { color: theme.secondary }]}>
                   {isEditing ? 'Salvar Alterações' : 'Criar Tarefa'}
                 </Text>
               </>
