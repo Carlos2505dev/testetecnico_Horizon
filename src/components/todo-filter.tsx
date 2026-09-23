@@ -17,10 +17,14 @@ export interface TodoFilterProps {
   onStatusChange: (status: StatusFilter) => void;
 }
 
-const FILTER_OPTIONS: { label: string; value: StatusFilter }[] = [
-  { label: 'Todas', value: 'all' },
-  { label: 'Pendentes', value: 'pending' },
-  { label: 'Concluídas', value: 'completed' },
+const FILTER_OPTIONS: {
+  label: string;
+  value: StatusFilter;
+  icon: keyof typeof Ionicons.glyphMap;
+}[] = [
+  { label: 'Todas', value: 'all', icon: 'list-outline' },
+  { label: 'Pendentes', value: 'pending', icon: 'time-outline' },
+  { label: 'Concluídas', value: 'completed', icon: 'checkmark-done-outline' },
 ];
 
 export function TodoFilter({
@@ -74,6 +78,8 @@ export function TodoFilter({
       <View style={styles.chipsContainer}>
         {FILTER_OPTIONS.map((option) => {
           const isActive = selectedStatus === option.value;
+          const contentColor = isActive ? theme.secondary : theme.textSecondary;
+
           return (
             <TouchableOpacity
               key={option.value}
@@ -91,12 +97,17 @@ export function TodoFilter({
               accessibilityState={{ selected: isActive }}
               accessibilityLabel={`Filtro: ${option.label}`}
             >
+              <Ionicons
+                name={option.icon}
+                size={16}
+                color={contentColor}
+              />
               <Text
                 style={[
                   styles.chipText,
                   {
-                    color: isActive ? theme.secondary : theme.textSecondary,
-                    fontWeight: isActive ? '700' : '400',
+                    color: contentColor,
+                    fontWeight: isActive ? '700' : '500',
                   },
                 ]}
               >
@@ -136,11 +147,12 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    gap: 6,
   },
   chipText: {
     fontSize: 13,
