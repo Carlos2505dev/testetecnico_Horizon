@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../hooks/use-theme';
 import { Todo } from '../types/todo';
+import { hapticFeedback } from '../utils/haptics';
 
 export interface TodoItemProps {
   todo: Todo;
@@ -28,7 +29,10 @@ export function TodoItem({ todo, onToggleStatus, onPress, onDelete }: TodoItemPr
     >
       <TouchableOpacity
         style={styles.checkboxContainer}
-        onPress={() => onToggleStatus(todo.id)}
+        onPress={() => {
+          hapticFeedback.selection();
+          onToggleStatus(todo.id);
+        }}
         hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         accessibilityRole="checkbox"
         accessibilityState={{ checked: todo.completed }}
@@ -77,7 +81,10 @@ export function TodoItem({ todo, onToggleStatus, onPress, onDelete }: TodoItemPr
 
       <TouchableOpacity
         style={styles.deleteButton}
-        onPress={() => onDelete(todo.id)}
+        onPress={() => {
+          hapticFeedback.impactLight();
+          onDelete(todo.id);
+        }}
         hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         accessibilityRole="button"
         accessibilityLabel={`Excluir tarefa ${todo.title}`}

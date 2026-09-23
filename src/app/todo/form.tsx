@@ -18,6 +18,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTheme } from '../../hooks/use-theme';
 import { useTodos } from '../../hooks/use-todos';
 import { useToast } from '../../components/ui-toast';
+import { hapticFeedback } from '../../utils/haptics';
 import { validateTodoTitle } from '../../utils/validation';
 
 export default function TodoFormScreen() {
@@ -50,6 +51,7 @@ export default function TodoFormScreen() {
     const error = validateTodoTitle(title);
     if (error) {
       setErrorMessage(error.title || 'Título inválido');
+      hapticFeedback.warning();
       return false;
     }
     setErrorMessage(null);
@@ -67,6 +69,7 @@ export default function TodoFormScreen() {
           description: description.trim() || undefined,
           completed,
         });
+        hapticFeedback.success();
         showSuccess('Tarefa atualizada com sucesso!');
       } else {
         await addTodo({
@@ -74,12 +77,14 @@ export default function TodoFormScreen() {
           description: description.trim() || undefined,
           completed,
         });
+        hapticFeedback.success();
         showSuccess('Tarefa criada com sucesso!');
       }
       router.back();
     } catch {
       const errorMsg = 'Não foi possível salvar a tarefa. Tente novamente.';
       setErrorMessage(errorMsg);
+      hapticFeedback.error();
       showError(errorMsg);
     } finally {
       setIsSubmitting(false);
@@ -226,7 +231,10 @@ export default function TodoFormScreen() {
 
               <Switch
                 value={completed}
-                onValueChange={setCompleted}
+                onValueChange={(val) => {
+                  hapticFeedback.selection();
+                  setCompleted(val);
+                }}
                 trackColor={{ false: '#767577', true: theme.success }}
                 thumbColor="#FFFFFF"
                 accessibilityLabel="Alternar status inicial da tarefa"

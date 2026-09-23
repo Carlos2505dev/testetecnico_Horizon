@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../hooks/use-theme';
+import { hapticFeedback } from '../utils/haptics';
 
 export interface DeleteConfirmModalProps {
   visible: boolean;
@@ -83,7 +84,10 @@ export function DeleteConfirmModal({
                     styles.confirmButton,
                     isDeleting && styles.buttonDisabled,
                   ]}
-                  onPress={onConfirm}
+                  onPress={() => {
+                    hapticFeedback.impactMedium();
+                    onConfirm();
+                  }}
                   disabled={isDeleting}
                   activeOpacity={0.8}
                   accessibilityRole="button"
