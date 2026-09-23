@@ -80,7 +80,7 @@ Objetivo: Configurar as telas do aplicativo com Expo Router e realizar a integra
 - [x] Task 4.2: Criar a tela de detalhe completo da tarefa (`src/app/todo/[id].tsx`).
   Commit sugerido: `feat(screens): cria tela de detalhes da tarefa com informações completas`
 
-- [ ] Task 4.3: Criar o formulário de criação e edição de tarefas (`src/app/todo/form.tsx` ou modal dedicado).
+- [x] Task 4.3: Criar o formulário de criação e edição de tarefas (`src/app/todo/form.tsx` ou modal dedicado).
   Commit sugerido: `feat(screens): implementa formulário para criação e edição de tarefas`
 
 - [ ] Task 4.4: Configurar rotas e navegação em pilha (Stack Layout) no Expo Router (`src/app/_layout.tsx`).
