@@ -103,39 +103,55 @@ Objetivo: Aplicar as regras estritas de validação de formulário, mensagens de
 
 ---
 
-## Sprint 6: Testes Unitários, QA e Documentação Final
+## Sprint 6: Ajustes, Correções de Erros e Testes no Simulador
+
+Objetivo: Realizar testes práticos de execução no simulador/dispositivo real, corrigindo eventuais falhas de layout, inconsistências e erros de execução.
+
+- [ ] Task 6.1: Testar e ajustar a execução no simulador (iOS / Android / Web) corrigindo eventuais falhas de rotas e exibição.
+  Commit sugerido: `fix(simulator): ajusta compatibilidade de execução e corrige falhas detectadas no simulador`
+
+- [ ] Task 6.2: Ajustar responsividade, espaçamentos e comportamentos do teclado virtual nos dispositivos.
+  Commit sugerido: `fix(ui): ajusta responsividade de tela e comportamento do teclado virtual`
+
+- [ ] Task 6.3: Corrigir pequenas inconsistências de sincronização local e estados da UI durante o fluxo completo de uso.
+  Commit sugerido: `fix(state): corrige inconsistências de fluxo e sincronização local detectadas em testes`
+
+---
+
+## Sprint 7: Testes Unitários, QA e Documentação Final
 
 Objetivo: Adicionar cobertura de testes unitários para regras de negócio e atualizar a documentação do repositório.
 
-- [ ] Task 6.1: Configurar ambiente de testes com Jest e React Native Testing Library.
+- [ ] Task 7.1: Configurar ambiente de testes com Jest e React Native Testing Library.
   Commit sugerido: `test(setup): configura ambiente de testes com jest e react native testing library`
 
-- [ ] Task 6.2: Escrever testes unitários para as regras de validação de formulário e lógica de filtro.
+- [ ] Task 7.2: Escrever testes unitários para as regras de validação de formulário e lógica de filtro.
   Commit sugerido: `test(validation): adiciona testes unitários para validação de formulário e filtros`
 
-- [ ] Task 6.3: Escrever testes unitários para o hook `useTodos` e gerenciamento de storage.
+- [ ] Task 7.3: Escrever testes unitários para o hook `useTodos` e gerenciamento de storage.
   Commit sugerido: `test(hooks): adiciona testes unitários para o hook useTodos e armazenamento local`
 
-- [ ] Task 6.4: Atualizar o arquivo `README.md` com instruções detalhadas de execução e decisões de arquitetura.
+- [ ] Task 7.4: Atualizar o arquivo `README.md` com instruções detalhadas de execução e decisões de arquitetura.
   Commit sugerido: `docs: atualiza readme com instruções de execução e visão geral do projeto`
 
 ---
 
-## Sprint 7: Revisão de Código e Qualidade (Code Review)
+## Sprint 8: Revisão de Código e Qualidade (Code Review)
 
 Objetivo: Realizar auditoria completa de código, verificar adesão aos princípios SOLID/Clean Code e validar acessibilidade e qualidade final.
 
-- [ ] Task 7.1: Auditoria de código para verificação de SOLID, Clean Code e remoção de código não utilizado.
+- [ ] Task 8.1: Auditoria de código para verificação de SOLID, Clean Code e remoção de código não utilizado.
   Commit sugerido: `refactor(review): realiza auditoria de código e refatoração para boas práticas`
 
-- [ ] Task 7.2: Validação de acessibilidade, contraste visual e consistência nos temas claro/escuro.
+- [ ] Task 8.2: Validação de acessibilidade, contraste visual e consistência nos temas claro/escuro.
   Commit sugerido: `style(review): valida consistência visual e acessibilidade dos temas`
 
-- [ ] Task 7.3: Testes de regressão e verificação final de funcionamento da aplicação.
+- [ ] Task 8.3: Testes de regressão e verificação final de funcionamento da aplicação.
   Commit sugerido: `test(qa): realiza verificação final de funcionamento e testes de regressão`
 
-- [ ] Task 7.4: Auditoria das documentações do projeto.
+- [ ] Task 8.4: Auditoria das documentações do projeto.
   Commit sugerido: `docs(review): realiza auditoria das documentações do projeto e garante que estejam atualizadas e completas`
 
-- [ ] Task 7.5: Limpeza geral do código e arquivos desnecessários.
+- [ ] Task 8.5: Limpeza geral do código e arquivos desnecessários.
   Commit sugerido: `refactor(review): realiza limpeza geral do código e arquivos desnecessários`
+
