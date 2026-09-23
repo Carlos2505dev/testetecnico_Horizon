@@ -77,7 +77,7 @@ Objetivo: Configurar as telas do aplicativo com Expo Router e realizar a integra
 - [x] Task 4.1: Atualizar a tela principal para integrar listagem, filtros e tratamento de estados (`src/app/index.tsx`).
   Commit sugerido: `feat(screens): integra listagem, filtros e estados de ui na tela principal`
 
-- [ ] Task 4.2: Criar a tela de detalhe completo da tarefa (`src/app/todo/[id].tsx`).
+- [x] Task 4.2: Criar a tela de detalhe completo da tarefa (`src/app/todo/[id].tsx`).
   Commit sugerido: `feat(screens): cria tela de detalhes da tarefa com informações completas`
 
 - [ ] Task 4.3: Criar o formulário de criação e edição de tarefas (`src/app/todo/form.tsx` ou modal dedicado).
