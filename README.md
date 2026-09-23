@@ -103,7 +103,7 @@ git clone https://github.com/Carlos2505dev/testetecnico_Horizon.git
 cd testetecnico_Horizon
 
 # 3. Instale as dependências
-npm install
+npm install --legacy-peer-deps
 
 # 4. Inicie o servidor de desenvolvimento do Expo
 npx expo start
