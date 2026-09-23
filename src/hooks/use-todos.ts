@@ -30,15 +30,16 @@ export function useTodos() {
     }
 
     try {
-      const data = await todoService.getTodos();
+      const data = await todoService.getTodos(25);
       if (!cachedData || cachedData.length === 0) {
         setTodos(data);
         await todoStorage.saveStoredTodos(data);
       } else {
-        const mergedMap = new Map<number, Todo>();
-        data.forEach((todo) => mergedMap.set(todo.id, todo));
-        cachedData.forEach((todo) => mergedMap.set(todo.id, todo));
-        const mergedList = Array.from(mergedMap.values());
+        const localCreatedTodos = cachedData.filter((todo) => todo.id > 200);
+        const apiTodos = data.filter(
+          (todo) => !localCreatedTodos.some((local) => local.id === todo.id)
+        );
+        const mergedList = [...localCreatedTodos, ...apiTodos];
         setTodos(mergedList);
         await todoStorage.saveStoredTodos(mergedList);
       }

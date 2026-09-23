@@ -2,8 +2,8 @@ import { CreateTodoPayload, Todo, UpdateTodoPayload } from '../types/todo';
 import { request } from './api';
 
 export const todoService = {
-  async getTodos(): Promise<Todo[]> {
-    return request<Todo[]>('/todos');
+  async getTodos(limit = 25): Promise<Todo[]> {
+    return request<Todo[]>(`/todos?_limit=${limit}`);
   },
 
   async getTodoById(id: number): Promise<Todo> {
