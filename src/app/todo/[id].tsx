@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -7,15 +9,31 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
 
 import { DeleteConfirmModal } from '../../components/delete-confirm-modal';
 import { LoadingState } from '../../components/ui-state';
+import { useToast } from '../../components/ui-toast';
 import { useTheme } from '../../hooks/use-theme';
 import { useTodos } from '../../hooks/use-todos';
-import { useToast } from '../../components/ui-toast';
 import { Todo } from '../../types/todo';
+
+function formatCreatedTime(todo: Todo): string {
+  const dateObj = todo.createdAt
+    ? new Date(todo.createdAt)
+    : todo.id > 200
+    ? new Date(todo.id)
+    : null;
+
+  if (dateObj && !isNaN(dateObj.getTime())) {
+    const timeStr = dateObj.toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    return `Criada às ${timeStr}`;
+  }
+
+  return 'Criada recentemente';
+}
 
 export default function TodoDetailScreen() {
   const theme = useTheme();
@@ -188,32 +206,13 @@ export default function TodoDetailScreen() {
             <Text
               style={[styles.idText, { color: theme.textSecondary }]}
             >
-              ID: #{todo.id}
+              {formatCreatedTime(todo)}
             </Text>
           </View>
 
           <Text style={[styles.title, { color: theme.text }]}>
             {todo.title}
           </Text>
-
-          <View style={styles.divider} />
-
-          <View style={styles.infoRow}>
-            <Ionicons
-              name="person-outline"
-              size={18}
-              color={theme.textSecondary}
-            />
-            <Text
-              style={[styles.infoLabel, { color: theme.textSecondary }]}
-            >
-              ID do Usuário:
-            </Text>
-            <Text style={[styles.infoValue, { color: theme.text }]}>
-              {todo.userId}
-            </Text>
-          </View>
-
           <View style={styles.divider} />
 
           <View style={styles.descriptionContainer}>

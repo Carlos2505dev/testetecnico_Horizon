@@ -87,6 +87,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       title: payload.title.trim(),
       completed: payload.completed ?? false,
       description: payload.description?.trim() || undefined,
+      createdAt: new Date().toISOString(),
     };
 
     setTodos((prev) => {
