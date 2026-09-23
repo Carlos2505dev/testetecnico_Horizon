@@ -12,7 +12,7 @@ export interface TodoItemProps {
   onDelete: (id: number) => void;
 }
 
-export function TodoItem({ todo, onToggleStatus, onPress, onDelete }: TodoItemProps) {
+function TodoItemComponent({ todo, onToggleStatus, onPress, onDelete }: TodoItemProps) {
   const theme = useTheme();
 
   return (
@@ -94,6 +94,8 @@ export function TodoItem({ todo, onToggleStatus, onPress, onDelete }: TodoItemPr
     </TouchableOpacity>
   );
 }
+
+export const TodoItem = React.memo(TodoItemComponent);
 
 const styles = StyleSheet.create({
   container: {

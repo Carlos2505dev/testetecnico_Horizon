@@ -104,6 +104,18 @@ export default function HomeScreen() {
     }
   };
 
+  const renderTodoItem = React.useCallback(
+    ({ item }: { item: Todo }) => (
+      <TodoItem
+        todo={item}
+        onToggleStatus={toggleTodoStatus}
+        onPress={handlePressTodo}
+        onDelete={handleDeleteRequest}
+      />
+    ),
+    [toggleTodoStatus, handlePressTodo, handleDeleteRequest]
+  );
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.background }]}
@@ -167,14 +179,11 @@ export default function HomeScreen() {
         <FlatList
           data={filteredTodos}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <TodoItem
-              todo={item}
-              onToggleStatus={toggleTodoStatus}
-              onPress={handlePressTodo}
-              onDelete={handleDeleteRequest}
-            />
-          )}
+          renderItem={renderTodoItem}
+          initialNumToRender={12}
+          maxToRenderPerBatch={10}
+          windowSize={7}
+          removeClippedSubviews={true}
           contentContainerStyle={
             filteredTodos.length === 0 ? styles.emptyListContent : styles.listContent
           }
