@@ -83,13 +83,29 @@ export function useTodos() {
     return newTodo;
   }, []);
 
+  const restoreTodo = useCallback(async (todoToRestore: Todo): Promise<void> => {
+    setError(null);
+    setTodos((prev) => {
+      const updated = [todoToRestore, ...prev];
+      todoStorage.saveStoredTodos(updated);
+      return updated;
+    });
+  }, []);
+
   const updateTodo = useCallback(async (id: number, payload: UpdateTodoPayload): Promise<boolean> => {
     setError(null);
 
     setTodos((prev) => {
-      const updated = prev.map((todo) =>
-        todo.id === id ? { ...todo, ...payload } : todo
-      );
+      const updated = prev.map((todo) => {
+        if (todo.id === id) {
+          const updatedItem = { ...todo };
+          if (payload.title !== undefined) updatedItem.title = payload.title;
+          if (payload.completed !== undefined) updatedItem.completed = payload.completed;
+          if (payload.description !== undefined) updatedItem.description = payload.description;
+          return updatedItem;
+        }
+        return todo;
+      });
       todoStorage.saveStoredTodos(updated);
       return updated;
     });
@@ -127,6 +143,25 @@ export function useTodos() {
     return true;
   }, []);
 
+  const clearCompletedTodos = useCallback(async (): Promise<void> => {
+    setError(null);
+
+    const completedTodos = todos.filter((t) => t.completed);
+    setTodos((prev) => {
+      const updated = prev.filter((todo) => !todo.completed);
+      todoStorage.saveStoredTodos(updated);
+      return updated;
+    });
+
+    for (const todo of completedTodos) {
+      try {
+        await todoService.deleteTodo(todo.id);
+      } catch {
+        setIsOfflineMode(true);
+      }
+    }
+  }, [todos]);
+
   const setSearchQuery = useCallback((query: string) => {
     setFilters((prev) => ({ ...prev, searchQuery: query }));
   }, []);
@@ -159,9 +194,11 @@ export function useTodos() {
     filters,
     fetchTodos,
     addTodo,
+    restoreTodo,
     updateTodo,
     toggleTodoStatus,
     deleteTodo,
+    clearCompletedTodos,
     setSearchQuery,
     setStatusFilter,
   };

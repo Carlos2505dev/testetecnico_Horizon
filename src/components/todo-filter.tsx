@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -15,6 +16,8 @@ export interface TodoFilterProps {
   onSearchChange: (query: string) => void;
   selectedStatus: StatusFilter;
   onStatusChange: (status: StatusFilter) => void;
+  onClearCompleted?: () => void;
+  completedCount?: number;
 }
 
 const FILTER_OPTIONS: {
@@ -32,6 +35,8 @@ export function TodoFilter({
   onSearchChange,
   selectedStatus,
   onStatusChange,
+  onClearCompleted,
+  completedCount = 0,
 }: TodoFilterProps) {
   const theme = useTheme();
 
@@ -75,7 +80,12 @@ export function TodoFilter({
         )}
       </View>
 
-      <View style={styles.chipsContainer}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.chipsScrollContent}
+        style={styles.chipsScrollView}
+      >
         {FILTER_OPTIONS.map((option) => {
           const isActive = selectedStatus === option.value;
           const contentColor = isActive ? theme.secondary : theme.textSecondary;
@@ -116,7 +126,22 @@ export function TodoFilter({
             </TouchableOpacity>
           );
         })}
-      </View>
+
+        {selectedStatus === 'completed' && completedCount > 0 && onClearCompleted && (
+          <TouchableOpacity
+            style={[styles.clearButton, { backgroundColor: 'rgba(239, 68, 68, 0.12)' }]}
+            onPress={onClearCompleted}
+            activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel="Limpar todas as tarefas concluídas"
+          >
+            <Ionicons name="trash-outline" size={14} color={theme.danger} />
+            <Text style={[styles.clearButtonText, { color: theme.danger }]}>
+              Limpar ({completedCount})
+            </Text>
+          </TouchableOpacity>
+        )}
+      </ScrollView>
     </View>
   );
 }
@@ -141,9 +166,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     height: '100%',
   },
-  chipsContainer: {
-    flexDirection: 'row',
+  chipsScrollView: {
     marginTop: 12,
+  },
+  chipsScrollContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
   chip: {
@@ -156,5 +184,18 @@ const styles = StyleSheet.create({
   },
   chipText: {
     fontSize: 13,
+  },
+  clearButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    gap: 4,
+    marginLeft: 4,
+  },
+  clearButtonText: {
+    fontSize: 12,
+    fontWeight: '600',
   },
 });

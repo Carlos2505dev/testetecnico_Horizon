@@ -113,10 +113,10 @@ Objetivo: Realizar testes práticos de execução no simulador/dispositivo real,
 - [x] Task 6.1: Testar e ajustar a execução no simulador (iOS / Android / Web) corrigindo eventuais falhas de rotas e exibição.
   Commit sugerido: `fix(simulator): ajusta compatibilidade de execução e corrige falhas detectadas no simulador`
 
-- [ ] Task 6.2: Ajustar responsividade, espaçamentos e comportamentos do teclado virtual nos dispositivos.
+- [x] Task 6.2: Ajustar responsividade, espaçamentos e comportamentos do teclado virtual nos dispositivos.
   Commit sugerido: `fix(ui): ajusta responsividade de tela e comportamento do teclado virtual`
 
-- [ ] Task 6.3: Corrigir pequenas inconsistências de sincronização local e estados da UI durante o fluxo completo de uso.
+- [x] Task 6.3: Corrigir pequenas inconsistências de sincronização local e estados da UI durante o fluxo completo de uso.
   Commit sugerido: `fix(state): corrige inconsistências de fluxo e sincronização local detectadas em testes`
 
 ---
