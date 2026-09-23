@@ -16,7 +16,7 @@ export const Colors = {
   },
   dark: {
     primary: '#FFD700',
-    secondary: '#E6C200',
+    secondary: '#111111',
     text: '#FFFFFF',
     textSecondary: '#A0A0A0',
     background: '#111111',
