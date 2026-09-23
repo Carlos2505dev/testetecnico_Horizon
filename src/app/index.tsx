@@ -14,6 +14,7 @@ import { useFocusEffect, useRouter } from 'expo-router';
 import { DeleteConfirmModal } from '../components/delete-confirm-modal';
 import { TodoFilter } from '../components/todo-filter';
 import { TodoItem } from '../components/todo-item';
+import { TodoProgressBar } from '../components/todo-progress-bar';
 import { EmptyState, ErrorState, LoadingState } from '../components/ui-state';
 import { useTheme } from '../hooks/use-theme';
 import { useTodos } from '../hooks/use-todos';
@@ -26,26 +27,35 @@ export default function HomeScreen() {
   const { showSuccess, showError } = useToast();
 
   const {
+    todos,
     filteredTodos,
     loading,
     error,
     isOfflineMode,
     filters,
     fetchTodos,
+    restoreTodo,
     toggleTodoStatus,
     deleteTodo,
+    clearCompletedTodos,
     setSearchQuery,
     setStatusFilter,
   } = useTodos();
 
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showClearModal, setShowClearModal] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
       fetchTodos();
     }, [fetchTodos])
   );
+
+  const totalCount = todos.length;
+  const completedCount = React.useMemo(() => {
+    return todos.filter((t) => t.completed).length;
+  }, [todos]);
 
   const handlePressTodo = (id: number) => {
     router.push(`/todo/${id}` as never);
@@ -64,16 +74,33 @@ export default function HomeScreen() {
 
   const handleConfirmDelete = async () => {
     if (todoToDelete && !isDeleting) {
+      const deletedItem = todoToDelete;
       setIsDeleting(true);
       try {
-        await deleteTodo(todoToDelete.id);
-        showSuccess('Tarefa excluída com sucesso!');
+        await deleteTodo(deletedItem.id);
         setTodoToDelete(null);
+        showSuccess('Tarefa excluída com sucesso!', {
+          label: 'Desfazer',
+          onPress: async () => {
+            await restoreTodo(deletedItem);
+            showSuccess('Exclusão desfeita com sucesso!');
+          },
+        });
       } catch {
         showError('Erro ao excluir a tarefa.');
       } finally {
         setIsDeleting(false);
       }
+    }
+  };
+
+  const handleConfirmClearCompleted = async () => {
+    try {
+      await clearCompletedTodos();
+      setShowClearModal(false);
+      showSuccess('Tarefas concluídas removidas!');
+    } catch {
+      showError('Erro ao limpar tarefas concluídas.');
     }
   };
 
@@ -111,11 +138,15 @@ export default function HomeScreen() {
         </View>
       )}
 
+      <TodoProgressBar total={totalCount} completed={completedCount} />
+
       <TodoFilter
         searchQuery={filters.searchQuery}
         onSearchChange={setSearchQuery}
         selectedStatus={filters.status}
         onStatusChange={setStatusFilter}
+        onClearCompleted={() => setShowClearModal(true)}
+        completedCount={completedCount}
       />
 
       {loading && filteredTodos.length === 0 ? (
@@ -166,6 +197,14 @@ export default function HomeScreen() {
         isDeleting={isDeleting}
         onConfirm={handleConfirmDelete}
         onCancel={() => setTodoToDelete(null)}
+      />
+
+      <DeleteConfirmModal
+        visible={showClearModal}
+        todoTitle={`${completedCount} tarefa(s) concluída(s)`}
+        isDeleting={isDeleting}
+        onConfirm={handleConfirmClearCompleted}
+        onCancel={() => setShowClearModal(false)}
       />
     </SafeAreaView>
   );
