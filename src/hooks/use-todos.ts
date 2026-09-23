@@ -30,7 +30,7 @@ export function useTodos() {
     }
 
     try {
-      const data = await todoService.getTodos(25);
+      const data = await todoService.getTodos(40);
       if (!cachedData || cachedData.length === 0) {
         setTodos(data);
         await todoStorage.saveStoredTodos(data);
@@ -171,10 +171,13 @@ export function useTodos() {
   }, []);
 
   const filteredTodos = useMemo(() => {
+    const query = filters.searchQuery.toLowerCase().trim();
+
     return todos.filter((todo) => {
-      const matchesSearch = todo.title
-        .toLowerCase()
-        .includes(filters.searchQuery.toLowerCase().trim());
+      const matchesSearch =
+        !query ||
+        todo.title.toLowerCase().includes(query) ||
+        (todo.description && todo.description.toLowerCase().includes(query));
 
       const matchesStatus =
         filters.status === 'all' ||

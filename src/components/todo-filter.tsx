@@ -56,7 +56,7 @@ export function TodoFilter({
         />
         <TextInput
           style={[styles.searchInput, { color: theme.text }]}
-          placeholder="Buscar tarefas pelo título..."
+          placeholder="Buscar pelo título ou observação..."
           placeholderTextColor={theme.textSecondary}
           value={searchQuery}
           onChangeText={onSearchChange}
