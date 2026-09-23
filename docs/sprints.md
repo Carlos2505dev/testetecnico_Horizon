@@ -125,7 +125,7 @@ Objetivo: Realizar testes práticos de execução no simulador/dispositivo real,
 
 Objetivo: Adicionar cobertura de testes unitários para regras de negócio e atualizar a documentação do repositório.
 
-- [ ] Task 7.1: Configurar ambiente de testes com Jest e React Native Testing Library.
+- [x] Task 7.1: Configurar ambiente de testes com Jest e React Native Testing Library.
   Commit sugerido: `test(setup): configura ambiente de testes com jest e react native testing library`
 
 - [ ] Task 7.2: Escrever testes unitários para as regras de validação de formulário e lógica de filtro.
